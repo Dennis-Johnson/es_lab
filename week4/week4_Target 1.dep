@@ -1,0 +1,2 @@
+Dependencies for Project 'week4', Target 'Target 1': (DO NOT MODIFY !)
+F (D:\6_D1\Week4\bcdtoHexa.s)(0x5E30FF43)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\NXP\LPC17xx--list .\bcdtohexa.lst --xref -o .\bcdtohexa.o --depend .\bcdtohexa.d)

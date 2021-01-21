@@ -1,0 +1,139 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000                 AREA             RESET, DATA, READONLY
+    3 00000000                 EXPORT           __Vectors
+    4 00000000         __Vectors
+    5 00000000 10001000        DCD              0X10001000
+    6 00000004 00000000        DCD              Reset_Handler
+    7 00000008                 ALIGN
+    8 00000008                 AREA             mycode, CODE, READONLY
+    9 00000000                 ENTRY
+   10 00000000                 EXPORT           Reset_Handler
+   11 00000000         
+   12 00000000         Reset_Handler
+   13 00000000 F04F 0001       LDR              R0, =1
+   14 00000004 F04F 0109       LDR              R1, =9
+   15 00000008 F04F 0202       LDR              R2, =2
+   16 0000000C F04F 0307       LDR              R3, =7
+   17 00000010 F04F 0406       LDR              R4, =6
+   18 00000014 F04F 0503       LDR              R5, =3
+   19 00000018 F04F 0608       LDR              R6, =8
+   20 0000001C F04F 0705       LDR              R7, =5
+   21 00000020 F04F 0804       LDR              R8, =4
+   22 00000024 F04F 0900       LDR              R9, =0
+   23 00000028         
+   24 00000028 E92D 03FF       STMDB            R13!, {R0-R9}
+   25 0000002C 4668            MOV              R0, R13
+   26 0000002E 4601    L2      MOV              R1, R0
+   27 00000030 4603            MOV              R3, R0
+   28 00000032 F1A3 0304       SUB              R3, #4
+   29 00000036 F10A 0B01       ADD              R11, R10, #1
+   30 0000003A 681C    L1      LDM              R3, {R4}
+   31 0000003C 680F            LDM              R1, {R7}
+   32 0000003E 42BC            CMP              R4, R7
+   33 00000040 D300            BCC              UP
+   34 00000042 4619            MOV              R1,R3
+   35 00000044 F1A3 0304 
+                       UP      SUB              R3,#4
+   36 00000048 F10B 0B01       ADD              R11, #1
+   37 0000004C F1BB 0F0A       CMP              R11, #10
+   38 00000050 D1F3            BNE              L1
+   39 00000052 C804            LDM              R0!, {R2}
+   40 00000054 C940            LDM              R1!, {R6}
+   41 00000056 F841 2C04       STMDB            R1, {R2}
+   42 0000005A F840 6C04       STMDB            R0, {R6}
+   43 0000005E F10A 0A01       ADD              R10, #1
+   44 00000062 F1BA 0F09       CMP              R10, #9
+   45 00000066 D1E2            BNE              L2
+   46 00000068 E8BD 03FF       LDM              R13!, {R0-R9}
+   47 0000006C         STOP
+   48 0000006C E7FE            B                STOP
+   49 0000006E                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q5.d -
+o.\q5.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q5.lst q5.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 2 in file q5.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 4 in file q5.s
+   Uses
+      At line 3 in file q5.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+L1 0000003A
+
+Symbol: L1
+   Definitions
+      At line 30 in file q5.s
+   Uses
+      At line 38 in file q5.s
+Comment: L1 used once
+L2 0000002E
+
+Symbol: L2
+   Definitions
+      At line 26 in file q5.s
+   Uses
+      At line 45 in file q5.s
+Comment: L2 used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 12 in file q5.s
+   Uses
+      At line 6 in file q5.s
+      At line 10 in file q5.s
+
+STOP 0000006C
+
+Symbol: STOP
+   Definitions
+      At line 47 in file q5.s
+   Uses
+      At line 48 in file q5.s
+Comment: STOP used once
+UP 00000044
+
+Symbol: UP
+   Definitions
+      At line 35 in file q5.s
+   Uses
+      At line 33 in file q5.s
+Comment: UP used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 8 in file q5.s
+   Uses
+      None
+Comment: mycode unused
+6 symbols
+339 symbols in table

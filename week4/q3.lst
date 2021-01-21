@@ -1,0 +1,200 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET,DATA,READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0x10001000
+    5 00000004 00000000        DCD              Reset_Handler
+    6 00000008                 ALIGN
+    7 00000008                 AREA             mycode,CODE,READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 481B            LDR              R0,=N1
+   12 00000002 6802            LDR              R2, [R0]
+   13 00000004 481B            LDR              R0, =N2
+   14 00000006 6803            LDR              R3, [R0]
+   15 00000008 481B            LDR              R0, =DST
+   16 0000000A 6805            LDR              R5, [R0]
+   17 0000000C         
+   18 0000000C F04F 0508       MOV              R5, #8
+   19 00000010 F04F 060A       MOV              R6, #10
+   20 00000014 F04F 090F       MOV              R9, #0xf
+   21 00000018 F04F 0400       MOV              R4, #0
+   22 0000001C F04F 0100 
+                       up      MOV              R1, #0
+   23 00000020 4617            MOV              R7, R2
+   24 00000022 4698            MOV              R8, R3
+   25 00000024 EA07 0709       AND              R7, R9
+   26 00000028 FA27 F704       LSR              R7, R4
+   27 0000002C 4437            ADD              R7, R6
+   28 0000002E F04F 0600       MOV              R6, #0
+   29 00000032 EA08 0809       AND              R8, R9
+   30 00000036 FA28 F804       LSR              R8, R4
+   31 0000003A F000 F80A       BL               addn
+   32 0000003E         
+   33 0000003E F101 0104       ADD              R1, #4
+   34 00000042 F104 0404       ADD              R4, #4
+   35 00000046 FA29 F901       LSR              R9, R1
+   36 0000004A 3D01            SUBS             R5, #1
+   37 0000004C D1E6            BNE              up
+   38 0000004E 7006            STRB             R6, [R0]
+   39 00000050         STOP
+   40 00000050 E7FE            B                STOP
+   41 00000052 4447    addn    ADD              R7,R8
+   42 00000054 2F0A            CMP              R7, #0xA
+   43 00000056 D303            BCC              store
+   44 00000058 F1A7 070A       SUB              R7, #0xA
+   45 0000005C F106 0601       ADD              R6, #01
+   46 00000060 F800 7B01 
+                       store   STRB             r7, [R0],#1
+   47 00000064 4770            BX               LR
+   48 00000066         
+   49 00000066 00 00 00000003 
+                       N1      DCD              0x00000003
+   50 0000006C 00000123 
+                       N2      DCD              0x00000123
+   51 00000070 00000000 
+              00000000 
+              00000000         AREA             mydata, DATA, READWRITE
+   52 00000000 00000000 
+                       DST     dcd              0
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   53 00000004                 end
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q3.d -
+o.\q3.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q3.lst q3.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file q3.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file q3.s
+   Uses
+      At line 2 in file q3.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+N1 00000068
+
+Symbol: N1
+   Definitions
+      At line 49 in file q3.s
+   Uses
+      At line 11 in file q3.s
+Comment: N1 used once
+N2 0000006C
+
+Symbol: N2
+   Definitions
+      At line 50 in file q3.s
+   Uses
+      At line 13 in file q3.s
+Comment: N2 used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file q3.s
+   Uses
+      At line 5 in file q3.s
+      At line 9 in file q3.s
+
+STOP 00000050
+
+Symbol: STOP
+   Definitions
+      At line 39 in file q3.s
+   Uses
+      At line 40 in file q3.s
+Comment: STOP used once
+addn 00000052
+
+Symbol: addn
+   Definitions
+      At line 41 in file q3.s
+   Uses
+      At line 31 in file q3.s
+Comment: addn used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file q3.s
+   Uses
+      None
+Comment: mycode unused
+store 00000060
+
+Symbol: store
+   Definitions
+      At line 46 in file q3.s
+   Uses
+      At line 43 in file q3.s
+Comment: store used once
+up 0000001C
+
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: up
+   Definitions
+      At line 22 in file q3.s
+   Uses
+      At line 37 in file q3.s
+Comment: up used once
+8 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DST 00000000
+
+Symbol: DST
+   Definitions
+      At line 52 in file q3.s
+   Uses
+      At line 15 in file q3.s
+Comment: DST used once
+mydata 00000000
+
+Symbol: mydata
+   Definitions
+      At line 51 in file q3.s
+   Uses
+      None
+Comment: mydata unused
+2 symbols
+345 symbols in table

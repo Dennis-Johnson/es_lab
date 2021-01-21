@@ -1,0 +1,43 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET,DATA,READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         ___Vectors
+    4 00000000 10001000        DCD              0x10001000
+    5 00000004 00000000        DCD              Reset_Handler
+    6 00000008                 ALIGN
+    7 00000008                 AREA             mycode,CODE,READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 480B            LDR              R0, =VALUE
+   12 00000002 6801            LDR              R1, [R0]
+   13 00000004 F04F 6270       LDR              R2, =0X0F000000
+   14 00000008 4B0A            LDR              R3, =RESULT
+   15 0000000A F04F 050C       LDR              R5, =12
+   16 0000000E F04F 0400       LDR              R4, =0
+   17 00000012 EA01 0602 
+                       UP      AND              R6,R1,R2
+   18 00000016 FA26 F605       LSR              R6,R5
+   19 0000001A F1A5 0504       SUB              R5,#4
+   20 0000001E EA4F 2212       LSR              R2,#8
+   21 00000022 4434            ADD              R4,R6
+   22 00000024 2A00            CMP              R2,#0
+   23 00000026 D1F4            BNE              UP
+   24 00000028 601C            STR              R4,[R3]
+   25 0000002A         STOP
+   26 0000002A E7FE            B                STOP
+   27 0000002C 01 02 03 
+              04       VALUE   DCB              01,02,03,04
+   28 00000030 00000000 
+              00000000         AREA             mydata,DATA,READWRITE
+   29 00000000 00000000 
+                       RESULT  DCD              0
+   30 00000004                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q6.d -
+o.\q6.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q6.lst q6.s

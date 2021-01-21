@@ -1,0 +1,184 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET,DATA,READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0x10001000
+    5 00000004 00000000        DCD              Reset_Handler
+    6 00000008                 ALIGN
+    7 00000008                 AREA             mycode,CODE,READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 4E14            LDR              R6, =RESULT
+   12 00000002 F04F 0200       MOV              R2, #00
+   13 00000006 4814            LDR              R0, =VALUE1
+   14 00000008 6801            LDR              R1, [R0]
+   15 0000000A         
+   16 0000000A 290A    up      CMP              R1, #0xA
+   17 0000000C D304            BCC              store
+   18 0000000E F1A1 010A       SUB              R1, #0xA
+   19 00000012 F102 0201       ADD              R2, #01
+   20 00000016 E7F8            B                up
+   21 00000018         
+   22 00000018 F806 1B01 
+                       store   STRB             R1, [R6], #1
+   23 0000001C 4611            MOV              R1, R2
+   24 0000001E F04F 0200       MOV              R2, #0
+   25 00000022 290A            CMP              R1, #0xA
+   26 00000024 D2F1            BCS              up
+   27 00000026 7031            STRB             R1, [R6]
+   28 00000028 4633            MOV              R3,R6
+   29 0000002A 4A0C            LDR              R2, =PACKED
+   30 0000002C 4E09            LDR              R6, =RESULT
+   31 0000002E EBA3 0406       SUB              R4,R3,R6
+   32 00000032 F816 0B01 
+                       up1     LDRB             R0,[R6],#1
+   33 00000036 F856 1B01       LDR              R1,[R6],#1
+   34 0000003A EA4F 1101       LSL              R1, #4
+   35 0000003E EA41 0100       ORR              R1,R0
+   36 00000042 F802 1B01       STRB             R1, [R2], #1
+   37 00000046 F1A4 0401       SUB              R4, #1
+   38 0000004A 2C02            CMP              R4, #2
+   39 0000004C D2F1            BCS              up1
+   40 0000004E         STOP
+   41 0000004E E7FE            B                STOP
+   42 00000050 0000000F 
+                       VALUE1  DCD              0x000F
+   43 00000054 00000000 
+              00000000 
+              00000000 
+              00000000         AREA             mydata, DATA,READWRITE
+   44 00000000 00000000 
+                       RESULT  DCD              0
+   45 00000004 00000000 
+                       PACKED  DCD              0
+   46 00000008                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q2.d -
+o.\q2.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q2.lst q2.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file q2.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file q2.s
+   Uses
+      At line 2 in file q2.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file q2.s
+   Uses
+      At line 5 in file q2.s
+      At line 9 in file q2.s
+
+STOP 0000004E
+
+Symbol: STOP
+   Definitions
+      At line 40 in file q2.s
+   Uses
+      At line 41 in file q2.s
+Comment: STOP used once
+VALUE1 00000050
+
+Symbol: VALUE1
+   Definitions
+      At line 42 in file q2.s
+   Uses
+      At line 13 in file q2.s
+Comment: VALUE1 used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file q2.s
+   Uses
+      None
+Comment: mycode unused
+store 00000018
+
+Symbol: store
+   Definitions
+      At line 22 in file q2.s
+   Uses
+      At line 17 in file q2.s
+Comment: store used once
+up 0000000A
+
+Symbol: up
+   Definitions
+      At line 16 in file q2.s
+   Uses
+      At line 20 in file q2.s
+      At line 26 in file q2.s
+
+up1 00000032
+
+Symbol: up1
+   Definitions
+      At line 32 in file q2.s
+   Uses
+      At line 39 in file q2.s
+Comment: up1 used once
+7 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+PACKED 00000004
+
+Symbol: PACKED
+   Definitions
+      At line 45 in file q2.s
+   Uses
+      At line 29 in file q2.s
+Comment: PACKED used once
+RESULT 00000000
+
+Symbol: RESULT
+   Definitions
+      At line 44 in file q2.s
+   Uses
+      At line 11 in file q2.s
+      At line 30 in file q2.s
+
+mydata 00000000
+
+Symbol: mydata
+   Definitions
+      At line 43 in file q2.s
+   Uses
+      None
+Comment: mydata unused
+3 symbols
+345 symbols in table
